@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->id();
+            $table->text('definition');
+            $table->string('term');
+            $table->foreignId('section_id')->constrained()->onDelete('cascade');
+            $table->text('example');
             $table->timestamps();
+            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
         });
+       
     }
 
     /**

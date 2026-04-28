@@ -9,4 +9,8 @@ class Section extends Model
 {
     /** @use HasFactory<\Database\Factories\SectionFactory> */
     use HasFactory;
+    
+    public function terms(){
+        return $this->hasMany(Term::class);
+    }
 }

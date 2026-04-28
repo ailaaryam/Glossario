@@ -5,12 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function login(Request $request)
+    {
+        $admin = Admin::where('email', $request->email)->first();
+
+        if (!$admin || !Hash::check($request->password, $admin->password)) {
+            return response()->json([
+                'message' => 'Email ou senha inválidos'
+            ], 401);
+        }
+
+        return response()->json([
+            'message' => 'Login realizado com sucesso',
+            'admin' => $admin
+        ]);
+    }
+    
     public function index()
     {
         //
