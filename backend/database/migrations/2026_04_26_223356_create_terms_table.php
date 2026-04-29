@@ -16,9 +16,10 @@ return new class extends Migration
             $table->text('definition');
             $table->string('term');
             $table->foreignId('section_id')->constrained()->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
             $table->text('example');
             $table->timestamps();
-            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
+            
         });
        
     }
