@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('section_id')->constrained()->onDelete('cascade');
             $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
             $table->text('example');
+            $table->string('audio')->nullable();
             $table->timestamps();
             
         });
