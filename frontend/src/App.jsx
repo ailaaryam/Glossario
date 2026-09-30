@@ -18,6 +18,10 @@ function App() {
 
         <Route path="/terms" element={<Terms />} />
 
+
+        <Route path="/sections" element={<Sections />} />
+        <Route path="/terms" element={<Terms />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -17,14 +17,25 @@ return new class extends Migration
             $table->text('definition');
             $table->text('example');
 
-            $table->foreignId('section_id')
-                ->constrained('sections')
-                ->onDelete('cascade');
 
-            $table->foreignId('created_by')
-                ->constrained('admins')
-                ->onDelete('cascade');
+            Schema::create('terms', function (Blueprint $table) {
+    $table->string('term');
+    $table->text('definition');
+    $table->text('example');
 
+    $table->foreignId('section_id')
+          ->constrained('sections')
+          ->onDelete('cascade');
+
+    $table->foreignId('created_by')
+          ->constrained('admins')
+          ->onDelete('cascade');
+
+    $table->string('audio')->nullable();
+    $table->timestamps();
+});
+
+            $table->string('audio')->nullable();
             $table->timestamps();
         });
        
