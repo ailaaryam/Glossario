@@ -1,7 +1,23 @@
+import { useNavigate } from "react-router-dom";
+
 function Dashboard() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h1>Painel Administrativo</h1>
+
+      <button onClick={() => navigate("/terms")}>
+        Gerenciar Termos
+      </button>
+
+      <button onClick={() => navigate("/sections")}>
+        Gerenciar Sections
+      </button>
+
+      <button onClick={() => navigate("/admins")}>
+        Gerenciar Administradores
+      </button>
     </div>
   );
 }
