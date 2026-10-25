@@ -7,16 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
 {
+    /** @use HasFactory<\Database\Factories\AdminFactory> */
     use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
     public function terms()
     {
         return $this->hasMany(Term::class, 'created_by');
     }
+
+     protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+    ];
+
+    
 }

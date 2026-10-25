@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreTermRequest;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateTermRequest;
-
 
 class TermController extends Controller
 {
@@ -31,31 +29,20 @@ class TermController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-{
-    $audioPath = null;
+    public function store(Request $request){
+        $term = Term::create([
+            'term' => $request->term,
+            'definition' => $request->definition,
+            'example' => $request->example,
+            'section_id' => $request->section_id,
+            'created_by' => $request->created_by,
+        ]);
 
-    // se for upload de arquivo
-    if ($request->hasFile('audio_file')) {
-        $audioPath = $request->file('audio_file')->store('audios', 'public');
+        return response()->json([
+            'message' => 'Termo criado com sucesso',
+            'term' => $term
+        ]);
     }
-
-    // se for link
-    if ($request->audio_url) {
-        $audioPath = $request->audio_url;
-    }
-
-    $term = Term::create([
-        'term' => $request->term,
-        'definition' => $request->definition,
-        'example' => $request->example,
-        'section_id' => $request->section_id,
-        'created_by' => $request->created_by,
-        'audio' => $audioPath,
-    ]);
-
-    return response()->json($term);
-}
 
     /**
      * Display the specified resource.

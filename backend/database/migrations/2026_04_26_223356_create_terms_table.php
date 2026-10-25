@@ -13,19 +13,13 @@ return new class extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->id();
-            $table->string('term');
             $table->text('definition');
+            $table->string('term');
+            $table->foreignId('section_id')->constrained()->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
             $table->text('example');
-
-            $table->foreignId('section_id')
-                ->constrained('sections')
-                ->onDelete('cascade');
-
-            $table->foreignId('created_by')
-                ->constrained('admins')
-                ->onDelete('cascade');
-
             $table->timestamps();
+            
         });
        
     }
